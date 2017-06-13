@@ -1,7 +1,11 @@
 BIN = voc_demo
 
-CFLAGS += -std=c99 -pedantic -O2 -Inuklear -g
-CXXFLAGS += -Irtaudio 
+ifdef SOUNDPIPE_DIR
+SOUNDPIPE_CFLAGS = -I$(SOUNDPIPE_DIR)/h -L$(SOUNDPIPE_DIR)
+endif
+
+CFLAGS += -std=c99 -pedantic -O2 -Inuklear $(SOUNDPIPE_CFLAGS) -g
+CXXFLAGS += -Irtaudio $(SOUNDPIPE_CFLAGS)
 CONFIG ?=
 
 include $(CONFIG)

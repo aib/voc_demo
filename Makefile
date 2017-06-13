@@ -29,8 +29,15 @@ CFLAGS += -I/usr/local/include
 CFLAGS += -I/opt/local/include -L/opt/local/lib
 else
 CXX=g++
+
+ifeq ($(UNAME), Linux)
+CXXFLAGS += -D__LINUX_ALSA__
+LIBS += -lstdc++ -lasound -lpthread -lsoundpipe -lsndfile
+else
 CXXFLAGS += -D__UNIX_JACK__ 
 LIBS += -lstdc++ -ljack -lsoundpipe -lsndfile
+endif
+
 LIBS += -lglfw -lGL -lm -lGLU 
 endif
 
